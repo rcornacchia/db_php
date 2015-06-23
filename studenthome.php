@@ -26,20 +26,24 @@
 
 	<h2>Search for Questions</h2>
 	<form action="questionPage.php" method="get">
-		Name: <input type="text" name="qText"><br>
+		Question: <input type="text" name="qText"><br>
 		<input type="submit" value="Search">
 	</form>
 
 	<h2>Search by Company</h2>
 		<form action="CompanyPage.php" method="get">
-		Name: <input type="text" name="compSearchName"><br>
+		Company: <input type="text" name="compSearchName"><br>
 		<input type="submit" value="Search">
 	</form>
 
 	<h2>Add a question and the Company that asked it</h2>
 	<form action="addQuestion.php" method="get">
-		Name: <input type="text" name="newQuestion"><br>
-		Company: <input type="text" name="Company"><br>
+		Question: <input type="text" name="newQuestion"><br>
+		Company: <input type="text" name="company"><br>
+		Type: <input type="text" name="type"><br>
+   		<input type="radio" name="difficulty" value="1" checked="checked">1 <br>
+   		<input type="radio" name="difficulty" value="2">2 <br>
+   		<input type="radio" name="difficulty" value="3">3		
 		<input type="submit" value="Add">
 	</form>
 
