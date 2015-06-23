@@ -10,7 +10,7 @@
 
 
 	<h2>Search for Questions</h2>
-	<form action="questionPage.php.php" method="get">
+	<form action="questionPage.php" method="get">
 		Name: <input type="text" name="qText"><br>
 		<input type="submit" value="Search">
 	</form>
