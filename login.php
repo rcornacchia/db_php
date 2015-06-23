@@ -1,16 +1,10 @@
 <?php
 	require_once "common.php";
-
 	$email = $_REQUEST["email"];
-
 	// adding check for user submits blank textbox
-
-
 	$query = sprintf("SELECT * FROM Users WHERE Users.uemail = '%s'",
                         mysqli_real_escape_string($conn,$email));
     
-
-
     // Perform Query
     $result = mysqli_query($conn,$query);
 	if(!$result) {
@@ -22,7 +16,6 @@
 //        print($query);
     }
     
-
     $row_cnt = $result -> num_rows;
     
     if($row_cnt == 1){
@@ -64,5 +57,4 @@
         }
     }
     
-
 ?>
