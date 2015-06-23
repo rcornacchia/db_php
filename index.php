@@ -36,9 +36,11 @@
 	<h2>OR</h2>
 
 	<form action="signup.php" method="get">
-	Name: <input type="text" name="name"><br>
+	Username: <input type="text" name="uname"><br>
 	E-mail: <input type="text" name="email"><br>
 	School: <input type="text" name="school"><br>
+    <input type="radio" name="occupation" value="Student" checked="checked">Student <br>
+    <input type="radio" name="occupation" value="Teacher">Teacher<br>
 	<input type="submit" value="Register">
 	</form>
 
