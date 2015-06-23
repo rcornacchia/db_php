@@ -5,7 +5,7 @@
 //    $questionCategory = $_REQUEST["category"];
 
     //find question
-    $query = sprintf("SELECT * FROM Questions JOIN Is_Type ON Questions.qid = Is_Type.qid WHERE Questions.qtext LIKE '%s' LIMIT 1",
+    $query = sprintf("SELECT * FROM Questions JOIN Is_Type ON Questions.qid = Is_Type.qid JOIN Question_Types ON Question_Types.qtid = Is_Type.qtid WHERE Questions.qtext LIKE '%s' LIMIT 1",
                      mysqli_real_escape_string($conn,$questionContent));
     
     // Perform Query
@@ -16,6 +16,10 @@
         die($message);
     }
     else{
+        
+        if($result -> num_rows == 0){
+            die('Question not found');
+        }
 //        print($query);
         $row = mysqli_fetch_assoc($result);
         $qText = $row['qtext'];
@@ -42,12 +46,14 @@
         <td>Content</td>
         <td>Upvotes</td>
         <td>Difficulty</td>
+        <td>Type</td>
         <td>Date</td>
         </tr>
         <tr>
             <td><?php echo $row['qtext'];?></td>
             <td><?php echo $row['upvotes'];?></td>
             <td><?php echo $row['difficulty'];?></td>
+            <td><?php echo $row['qtname'];?></td>
             <td><?php echo $row['date'];?></td>
         </tr>
     </table>
