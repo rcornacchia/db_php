@@ -21,7 +21,7 @@
         $qText = $row['qtext'];
         $qid = $row['qid'];
         
-        //get all for question
+        //get all info about for question
         $query = sprintf("SELECT Users.uname, Comments.content, Comments.date FROM Commented_On JOIN Comments ON Commented_On.cid = Comments.cid JOIN Users on Commented_On.uid = Users.uid WHERE Commented_On.qid = '%s'",
                          mysqli_real_escape_string($conn,$qid));
 
@@ -29,6 +29,7 @@
         
         //content, date for Comments
         print_r ($row);
+        $_SESSION['qid'] = $row['qid'];
         
     }
 ?>
@@ -68,12 +69,20 @@
     echo "</table>";
     ?>
 
+<br>
+
+<form action="upvote.php" method="get">
+<button type="button" style="width:200px;height:50px">Upvote!</button>
+</form>
 
 <br>
 <form action="addComment.php" method="get">
-Add Comment: <input type="text" name="new-comment" size='40' height='60'>
+Add Comment:   <input type="text" name="new-comment" size='40' height='60'>
 <input type="submit" value="Submit">
 </form>
+
+
+
 
 
 
