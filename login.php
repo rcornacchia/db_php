@@ -6,15 +6,13 @@
 	// adding check for user submits blank textbox
 
 
-	$query = sprintf("SELECT * 
-						FROM Users, Teachers
-						WHERE Users.uemail = '%s' OR Teachers.temail = '%s'",
-						mysql_real_escape_string($email),
-						mysql_real_escape_string($email));
+	$query = sprintf("SELECT * FROM Users, Teachers WHERE Users.uemail = '%s' OR Teachers.temail = '%s'",
+                        mysqli_real_escape_string($conn,$email),
+						mysqli_real_escape_string($conn,$email));
 	// mysql_real_escape_string
 
 	// Perform Query
-	$result = mysql_query($query);
+	$result = mysqli_query($conn,$query);
 
 
 	if(!$result) {
@@ -24,7 +22,7 @@
 	}
 
 	// Use result
-	while($row = mysql_fetch_assoc($result)) {
+	while($row = mysqli_fetch_assoc($result)) {
 		print_r($row);
 	}
 

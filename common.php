@@ -8,8 +8,9 @@
 	$dbuser = "rlc2160";
 	$dbpassword = "t3chmark";
 	$dbname = "cs4111";
-	$conn = mysql_connect($dburl, $dbuser, $dbpassword, $dbname);
+	$conn = mysqli_connect($dburl, $dbuser, $dbpassword, $dbname);
 	if(!$conn){
 		die ("It didn't work!");
 	}
+
 ?>
