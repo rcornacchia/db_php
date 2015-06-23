@@ -60,13 +60,32 @@
         }
         else{
             //worked
-            //now get uid of student and it to to GOES_TO relationship with school
+            //now get uid of student and add it to GOES_TO relationship with school
             $query = sprintf("SELECT * FROM Users WHERE uemail = '%s'",
                              mysqli_real_escape_string($conn,$email));
             $result = mysqli_query($conn,$query);
             $row = mysqli_fetch_assoc($result);
             $uid = $row['uid'];
             
+            // check to see if school is already in db
+            $query = sprintf("SELECT Schools.sname FROM Schools WHERE Schools.sname = '%s'", $school);
+            $result = mysqli_query($conn, $query);
+            if(!$result) {
+                die("Problem with school selection query");
+            }else {
+                $numRows = $result -> num_rows;
+            }
+
+            if($numRows == 0) {
+                // then school isn't already in db, so add
+            
+                $sql = sprintf("INSERT INTO Schools (sname)
+                VALUES ('%s')", mysqli_real_escape_string($conn, $school));
+
+                if (!mysqli_query($conn, $sql)) {
+                    die("Error: " . $sql . "<br>" . mysqli_error($conn));
+                }
+            }
             
             //get sid of school
             $query = sprintf("SELECT * FROM Schools WHERE sname = '%s'",
