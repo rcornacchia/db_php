@@ -16,19 +16,20 @@
         die($message);
     }
     else{
-        print($query);
+//        print($query);
         $row = mysqli_fetch_assoc($result);
         $qText = $row['qtext'];
         $qid = $row['qid'];
         
-        //get all for question
+        //get all info about for question
         $query = sprintf("SELECT Users.uname, Comments.content, Comments.date FROM Commented_On JOIN Comments ON Commented_On.cid = Comments.cid JOIN Users on Commented_On.uid = Users.uid WHERE Commented_On.qid = '%s'",
                          mysqli_real_escape_string($conn,$qid));
 
         $result = mysqli_query($conn,$query);
         
         //content, date for Comments
-        print_r ($row);
+//        print_r ($row);
+        $_SESSION['qid'] = $row['qid'];
         
     }
 ?>
@@ -52,10 +53,9 @@
     </table>
 
     <h2> Comments </h2>
-    <table style="width:90%" border="3">
     <?php
-        echo "<table border='1'><br />";
-    
+        echo "<table border='1'> <tr><td>Name</td><td>Content</td><td>Date</td></tr><br />";
+        
         while($comment=mysqli_fetch_array($result)) {
             echo "<tr>";
             for ($col = 0; $col < 3; $col ++) {
@@ -68,12 +68,19 @@
     echo "</table>";
     ?>
 
+<br>
+
+<a href='upvote.php'> UPVOTE! </a>
 
 <br>
+<br>
 <form action="addComment.php" method="get">
-Add Comment: <input type="text" name="new-comment" size='40' height='60'>
+Add Comment:   <input type="text" name="new-comment" size='40' height='60'>
 <input type="submit" value="Submit">
 </form>
+
+
+
 
 
 
