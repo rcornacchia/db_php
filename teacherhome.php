@@ -11,7 +11,7 @@
 	<h2>Add a Student you've taught</h2>
 	<form action="addStudent.php" method="get">
 		Name: <input type="text" name="studentName"><br>
-		Name: <input type="text" name="studentEmail"><br>
+		Email: <input type="text" name="studentEmail"><br>
 		<input type="submit" value="Add">
 	</form>
 

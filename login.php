@@ -1,4 +1,4 @@
-<?php
+    <?php
 	require_once "common.php";
 	$email = $_REQUEST["email"];
 	// adding check for user submits blank textbox
@@ -22,7 +22,7 @@
         print('user is student');
         $_SESSION["email"] = $email;
         //redirect to correct webpage
-        header("Location: localhost/studentHome.php"); /* Redirect browser */
+        header("Location: studentHome.php"); /* Redirect browser */
         exit();
     }
     else{
@@ -49,7 +49,7 @@
             print('user is teacher');
             $_SESSION["email"] = $email;
             //redirect to correct webpage
-            header("Location: localhost/teacherHome.php"); /* Redirect browser */
+            header("Location: teacherHome.php"); /* Redirect browser */
             exit();
         }
         else{

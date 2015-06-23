@@ -14,9 +14,10 @@
 		<input type="submit" value="Add">
 	</form>
 
-	<h2>Add a question</h2>
+	<h2>Add a question and the Company that asked it</h2>
 	<form action="addSchool.php" method="get">
 		Name: <input type="text" name="newQuestion"><br>
+		Company: <input type="text" name="Company"><br>
 		<input type="submit" value="Add">
 	</form>
 
