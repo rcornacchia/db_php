@@ -10,9 +10,11 @@
 
 	// echo "My first PHP script";
 
-	$x = 1;
-	$y = $x * 5;
-	echo $y;
+	$x = 0;
+	session_start(); 
+	$_SESSION['views'] = $x + 1; // store session data
+	echo "Pageviews = ". $_SESSION['views']; //retrieve data
+
 
 
 ?>
