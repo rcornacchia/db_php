@@ -1,6 +1,21 @@
 <?php
-
+	require_once "common.php";
 	
+	// get email from login page
+	$email = $_SESSION["email"];
+
+	// perform query
+	$query = sprintf("SELECT Teachers.tname FROM Teachers WHERE Teachers.temail = '%s'", $email);
+	$result = mysqli_query($conn, $query);
+	if(!$result) {
+		$message = 'Invalid query: ' . mysql_error() . "\n";
+		$message .= 'Whole query: ' . $query;
+		die($message);
+	}
+
+	$row = $result->fetch_assoc();
+
+	print "Welcome " . $row["tname"];
 
 ?>
 
