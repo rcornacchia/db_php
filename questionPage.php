@@ -16,7 +16,7 @@
         die($message);
     }
     else{
-        print($query);
+//        print($query);
         $row = mysqli_fetch_assoc($result);
         $qText = $row['qtext'];
         $qid = $row['qid'];
@@ -28,7 +28,7 @@
         $result = mysqli_query($conn,$query);
         
         //content, date for Comments
-        print_r ($row);
+//        print_r ($row);
         $_SESSION['qid'] = $row['qid'];
         
     }
@@ -53,10 +53,9 @@
     </table>
 
     <h2> Comments </h2>
-    <table style="width:90%" border="3">
     <?php
-        echo "<table border='1'><br />";
-    
+        echo "<table border='1'> <tr><td>Name</td><td>Content</td><td>Date</td></tr><br />";
+        
         while($comment=mysqli_fetch_array($result)) {
             echo "<tr>";
             for ($col = 0; $col < 3; $col ++) {
@@ -71,10 +70,9 @@
 
 <br>
 
-<form action="upvote.php" method="get">
-<button type="button" style="width:200px;height:50px">Upvote!</button>
-</form>
+<a href='upvote.php'> UPVOTE! </a>
 
+<br>
 <br>
 <form action="addComment.php" method="get">
 Add Comment:   <input type="text" name="new-comment" size='40' height='60'>
