@@ -35,12 +35,5 @@
     echo "</table>";
 ?>
 
-
-
-
-
-
-
-
 </body>
 </html>

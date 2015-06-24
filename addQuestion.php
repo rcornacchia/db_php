@@ -99,6 +99,10 @@
 			}
 		}
 
+		// also add to Asked_By
+
+		// add interview
+
 	} else {
 		print "Question already exists.";
 	}
