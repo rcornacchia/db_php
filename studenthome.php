@@ -41,9 +41,15 @@
 		Question: <input type="text" name="newQuestion"><br>
 		Company: <input type="text" name="company"><br>
 		Type: <input type="text" name="type"><br>
+		<p>Difficulty</p>
    		<input type="radio" name="difficulty" value="1" checked="checked">1 <br>
    		<input type="radio" name="difficulty" value="2">2 <br>
    		<input type="radio" name="difficulty" value="3">3		
+
+		<p>Experience</p>
+   		<input type="radio" name="experience" value="1" checked="checked">1 <br>
+   		<input type="radio" name="experience" value="2">2 <br>
+   		<input type="radio" name="expiereince" value="3">3		
 		<input type="submit" value="Add">
 	</form>
 
