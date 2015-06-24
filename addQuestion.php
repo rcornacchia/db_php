@@ -11,31 +11,51 @@
 	$comp = $_REQUEST["company"];
 	// get question type
 	$type = $_REQUEST["type"];
+    //experience from 1-3
+    $experience = !$_REQUEST["experience"];
+    //company id
+    $compid = 0;
+    $qid = 0;
+    $qtid = 0;
+
+
 
 	$difficulty = $_REQUEST["difficulty"];
 
-	//check to see if company is in database already
-	$query = sprintf("SELECT Companies.compname FROM Companies WHERE Companies.compname = '%s'", $comp);
+	//1. Company
+	$query = sprintf("SELECT * FROM Companies WHERE Companies.compname = '%s' LIMIT 1", mysqli_real_escape_string($conn,$comp));
 	$result = mysqli_query($conn, $query);
-	if($result) {
-		$numRows = $result -> num_rows;
+
+	if(!$result) {
+        $message = 'Couldnt select * from companies: ' . mysql_error() . "\n";
+        $message .= 'Whole query: ' . $query;
+        die($message);
 	} else {
-		print "No entries";
-	}
-	if($numRows == 0) {
-		// then company isn't already in db, so add
-		$query = "INSERT INTO Companies (compname)
-		VALUES ('$comp')";
+		$numRows = $result -> num_rows;
+        if($numRows == 0) {
+            //1a. Company not in DB -- Add it and get its id
+            $query = sprintf("INSERT INTO Companies (compname) VALUES ('%s')",mysqli_real_escape_string($conn,$comp));
+            $result = mysqli_query($conn, $query);
+            if (!$result) {
+                $message = 'problem with insert into companies';
+                $message = $message . 'Invalid query: ' . mysql_error() . "\n";
+                die($message);
+            }
+            else{
+                $compid = mysqli_insert_id($conn);
+            }
+        }
+        else{
+            //1b. Company in DB -- get it's id
+            $row = mysqli_fetch_assoc($result);
+            $compid = $row['compid'];
+        }
+    }
+    
+    
 
-
-
-		if (!mysqli_query($conn, $query)) {
-		    print "Error: " . $query . "<br>" . mysqli_error($conn);
-		}
-	}
-
-	//check to see if question type is in db already
-	$query = sprintf("SELECT * FROM Question_Types WHERE Question_Types.qtname = '%s'", $type);
+	//2. Question Type
+	$query = sprintf("SELECT * FROM Question_Types WHERE Question_Types.qtname = '%s'", mysqli_real_escape_string($conn,$type));
 	$qtid = 0;
 	$result = mysqli_query($conn, $query);
 	if(!$result) {
@@ -45,9 +65,8 @@
 	} else {
 			$numRows = $result -> num_rows;
 			if($numRows == 0) {
-				// then q type isn't already in db, so add
-				$query = sprintf("INSERT INTO Question_Types (qtname)
-				VALUES ('%s')", $type);
+                //2a. Question Type doesnt exist -- Add it and get id
+				$query = sprintf("INSERT INTO Question_Types (qtname) VALUES ('%s')", mysqli_real_escape_string($conn,$type));
 				$result = mysqli_query($conn, $query);
 				if (!$result) {
 					$message = 'problem with insert into question type query  ';
@@ -59,49 +78,79 @@
 				}
 			}
 			else {
+                //2b. Question type does exist -- Get it
 					$row = mysqli_fetch_assoc($result);
 					$qtid = $row['qtid'];
-
 			}
 	}
 
 
-	//check to see if question is in database already
+	//3. Question
 	$query = sprintf("SELECT Questions.qtext FROM Questions WHERE Questions.qtext = '%s'", $q);
 	$result = mysqli_query($conn, $query);
-	if($result) {
-		$numRows = $result -> num_rows;
-	} else {
-		print "No entries";
-	}
-	if($numRows == 0) {
-		// then question doesn't exist, add
-		$query = "INSERT INTO Questions(difficulty, upvotes, qtext)
-		VALUES ($difficulty , 0, '$q')";
-		$result = mysqli_query($conn, $query);
-		if (!$result) {
-		    $message = 'problem with select * from into question type query  ';
-			$message = $message . 'Invalid query: ' . mysql_error() . "\n";
-		    die($message);
-		} else {
-			// Question successfully added to Questions table
-			$qid = mysqli_insert_id($conn);
-			// Now add to is_Type
-			$query = sprintf("INSERT INTO Is_Type(qid, qtid)
-			VALUES ('%s', '%s')", $qid, $qtid);
-
-			// run query
-			if (!mysqli_query($conn, $query)) {
-			    print "Error: " . $query . "<br>" . mysqli_error($conn);
-			}else {
-				// Question also logged to Is_Types table
-				print "Question successfully added!";
-			}
-		}
+	if(!$result) {
+         $message = 'Couldnt select * from companies: ' . mysql_error() . "\n";
+         $message .= 'Whole query: ' . $query;
+         die($message);
 
 	} else {
-		print "Question already exists.";
+        $numRows = $result -> num_rows;
+         if($numRows == 0) {
+             //3a. Question doesnt exist -- Add it and get id
+             $query = sprintf("INSERT INTO Questions(difficulty, upvotes, qtext) VALUES ('%s' , 0, '%s')",mysqli_real_escape_string($conn,$difficulty),mysqli_real_escape_string($conn,$q));
+             $result = mysqli_query($conn, $query);
+             if (!$result) {
+                 $message = 'problem with select * from into question type query  ';
+                 $message = $message . 'Invalid query: ' . mysql_error() . "\n";
+                 die($message);
+             }
+             $qid = mysqli_insert_id($conn);
+         }
+         else{
+             //3a. Question does exist -- Die and stop here
+             die('question already exists in db');
+         }
 	}
+    
+    //4. Is_Type
+    $query = sprintf("INSERT INTO Is_Type(qid, qtid) VALUES ('%s', '%s')", $qid, $qtid);
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        $message = 'problem with select * from into question type query  ';
+        $message = $message . 'Invalid query: ' . mysql_error() . "\n";
+        die($message);
+    }
+    else {
+        /* Question added to Is_Types */
+    }
+    
+    //5. Asked_By
+    $query = sprintf("INSERT INTO Asked_By VALUES ('%s','%s')",$qid, $compid);
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        $message = 'problem with select * from into question type query  ';
+        $message = $message . 'Invalid query: ' . mysql_error() . "\n";
+        die($message);
+    }
+    else {
+        /* Question added to Is_Types */
+    }
+    
+    //6. Interviewed_By
+    $query = sprintf("INSERT INTO Interviewed_By VALUES ('%s','%s','%s')",$experience,$qid, $compid);
+    $result = mysqli_query($conn, $query);
+    if (!$result) {
+        $message = 'problem with insert into * from into Interviewed By type query  ';
+        $message = $message . 'Invalid query: ' . mysql_error() . "\n";
+        die($message);
+    }
+    else {
+        /* Question added to Is_Types */
+    }
+    
+
+    /* everything should be added now */
+    
 
 
 
@@ -109,7 +158,7 @@
 ?>
 
 <!DOCTYPE HTML>
-<html> 
+<html>
 <body>
 
 
