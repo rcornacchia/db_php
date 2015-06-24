@@ -93,6 +93,10 @@
          $message .= 'Whole query: ' . $query;
          die($message);
 
+		// also add to Asked_By
+
+		// add interview
+
 	} else {
         $numRows = $result -> num_rows;
          if($numRows == 0) {
