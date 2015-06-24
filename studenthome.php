@@ -31,8 +31,8 @@
 	</form>
 
 	<h2>Search by Company</h2>
-		<form action="CompanyPage.php" method="get">
-		Company: <input type="text" name="compSearchName"><br>
+		<form action="compSearch.php" method="get">
+		Company: <input type="text" name="searchComp"><br>
 		<input type="submit" value="Search">
 	</form>
 

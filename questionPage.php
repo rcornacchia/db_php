@@ -16,7 +16,6 @@
         die($message);
     }
     else{
-//        print($query);
         $row = mysqli_fetch_assoc($result);
         $qText = $row['qtext'];
         $qid = $row['qid'];
@@ -39,10 +38,10 @@
     <h1> Question </h1>
     <table style="width:90%" border="1">
         <tr>
-        <td>Content</td>
-        <td>Upvotes</td>
-        <td>Difficulty</td>
-        <td>Date</td>
+            <td>Content</td>
+            <td>Upvotes</td>
+            <td>Difficulty</td>
+            <td>Date</td>
         </tr>
         <tr>
             <td><?php echo $row['qtext'];?></td>
@@ -60,10 +59,10 @@
             echo "<tr>";
             for ($col = 0; $col < 3; $col ++) {
                 echo "<td>", $comment[$col], "</td>";
+            }
+            
+            echo "</tr>";
         }
-        
-        echo "</tr>";
-    }
     
     echo "</table>";
     ?>
