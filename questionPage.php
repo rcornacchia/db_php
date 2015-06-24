@@ -44,6 +44,7 @@
             <td>Date</td>
         </tr>
         <tr>
+            <!-- show all results. Each question should be/have a button -->
             <td><?php echo $row['qtext'];?></td>
             <td><?php echo $row['upvotes'];?></td>
             <td><?php echo $row['difficulty'];?></td>
