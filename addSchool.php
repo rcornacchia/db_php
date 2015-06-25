@@ -21,8 +21,7 @@
 		$numRows = $result -> num_rows;
 		if($numRows == 0) {
 
-			$query = sprintf("INSERT INTO Schools(sname)
-			VALUES ('%s')", $sname);
+			$query = sprintf("INSERT INTO Schools(sname) VALUES ('%s')", $sname);
 			$result = mysqli_query($conn, $query);
 			if($result){
 				print "We've never seen that school before. Don't worry, we'll add it to the list." . "<br>";

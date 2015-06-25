@@ -53,12 +53,14 @@
 		<input type="submit" value="Add">
 	</form>
 
-	<h2>Add a teacher</h2>
-	<form action="addSchool.php" method="get">
-		Name: <input type="text" name="teacherName"><br>
-		Email: <input type="text" name="teacherEmail">
-		<input type="submit" value="Add">
-	</form>
+<h2>Add offer received by company</h2>
+<form action="addOffer.php" method="get">
+Offer: <input type="text" name="offer"><br>
+Company: <input type="text" name="comp"><br>
+<input type="submit" value="Add">
+</form>
+
+
 
 </body>
 </html>
