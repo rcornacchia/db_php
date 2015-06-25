@@ -4,7 +4,7 @@
     //    $questionCategory = $_REQUEST["category"];
     
     //find question
-    $query = sprintf("SELECT qtext, upvotes, difficulty, date FROM Questions JOIN Asked_By ON Questions.qid = Asked_By.qid JOIN Companies ON Asked_By.compid = Companies.compid WHERE Companies.compname LIKE '%s' LIMIT 1",
+    $query = sprintf("SELECT qtext, upvotes, difficulty, date FROM Questions JOIN Asked_By ON Questions.qid = Asked_By.qid JOIN Companies ON Asked_By.compid = Companies.compid WHERE Companies.compname LIKE '%s'",
                      mysqli_real_escape_string($conn,$compName));
     
     // Perform Query
