@@ -12,7 +12,7 @@
 	// get question type
 	$type = $_REQUEST["type"];
     //experience from 1-3
-    $experience = !$_REQUEST["experience"];
+    $experience = $_REQUEST["experience"];
     //company id
     $compid = 0;
     $qid = 0;
@@ -150,6 +150,7 @@
     }
     else {
         /* Question added to Is_Types */
+        echo 'Question added succesfully!';
     }
     
 
