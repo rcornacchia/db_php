@@ -53,5 +53,5 @@ else{
         die('email not in DB');
     }
 }
-
+    mysqli_close($conn);
 ?>

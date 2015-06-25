@@ -53,12 +53,12 @@
 		<input type="submit" value="Add">
 	</form>
 
-<h2>Add offer received by company</h2>
-<form action="addOffer.php" method="get">
-Offer: <input type="text" name="offer"><br>
-Company: <input type="text" name="comp"><br>
-<input type="submit" value="Add">
-</form>
+	<h2>Add offer received by company</h2>
+	<form action="addOffer.php" method="get">
+	Offer: <input type="text" name="offer"><br>
+	Company: <input type="text" name="comp"><br>
+	<input type="submit" value="Add">
+	</form>
 
 <h2>See All Offers</h2>
 <form action="seeOffers.php" method="get">
@@ -66,6 +66,11 @@ Company: <input type="text" name="comp"><br>
 </form>
 
 
+	<br>
+	<br>
+	<form action="deleteUser.php" method="get">
+		<input type="submit" value="Delete Account" background-color="red">
+	</form>
 
 </body>
 </html>

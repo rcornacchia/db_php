@@ -145,5 +145,6 @@
         }
     }
     
+mysqli_close($conn);
 
 ?>
