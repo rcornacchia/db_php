@@ -60,6 +60,11 @@ Company: <input type="text" name="comp"><br>
 <input type="submit" value="Add">
 </form>
 
+<h2>See All Offers</h2>
+<form action="seeOffers.php" method="get">
+<input type="submit" value="Go">
+</form>
+
 
 
 </body>
